@@ -23,6 +23,7 @@ pipeline {
                      // sshCommand remote: remote, command: "git clone https://github.com/ayoajetunmobi/Resume.git"
                      // sshCommand remote: remote, command: "npm run build"
                         sshCommand remote: remote, command: "bash /home/linux/deploy.sh"
+					// sshCommand remote: remote, command: "bash /home/linux/deploy.sh"
                  }
                 }
                  

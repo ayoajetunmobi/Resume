@@ -1,0 +1,32 @@
+pipeline {
+    agent{ label 'nodeapp'
+    }
+    stages{
+        stage('Build') {
+            steps {
+                //sh 'git clone https://github.com/ayoajetunmobi/Resume.git'
+                sh 'npm -v'
+            }
+        }
+        stage('deploy'){
+            steps {
+                script{
+                    // use jenkins secret as best practise
+                     def remote = [:]
+                     remote.name = 'linux'
+                     remote.host = '192.168.234.133'
+                     remote.user = 'linux'
+                     remote.password = '1234'
+                     remote.allowAnyHosts = true
+                     stage('Remote SSH') {
+                     // sshCommand remote: remote, command: "git clone https://github.com/ayoajetunmobi/Resume.git"
+                     // sshCommand remote: remote, command: "npm run build"
+                        sshCommand remote: remote, command: "bash /home/linux/deploy.sh"
+                 }
+                }
+                 
+                
+            }       
+        }
+    }
+}
